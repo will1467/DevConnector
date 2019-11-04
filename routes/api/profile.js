@@ -23,7 +23,7 @@ router.get("/me", auth, async (req, res) => {
 });
 
 //get all profiles
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const profiles = await Profile.find().populate("user", ["name", "avatar"]);
         res.json(profiles);
@@ -34,7 +34,7 @@ router.get("/", auth, async (req, res) => {
 });
 
 //get profile by user id
-router.get("/user/:user_id", auth, async (req, res) => {
+router.get("/user/:user_id", async (req, res) => {
     try {
         const profile = await Profile.findOne({ user: req.params.user_id }).populate("user", ["name", "avatar"]);
         if (!profile) {

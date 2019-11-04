@@ -1,5 +1,5 @@
 {
-    "mongoURI": "mongodb+srv://admin:admin@mern-ewww3.mongodb.net/test?retryWrites=true&w=majority",
+    "mongoURI": "mongodb+srv://admin:admin@mern-ewww3.mongodb.net/DevConnector?retryWrites=true&w=majority",
     "JWTSecret": "woejfoiwejfoijwoiefjioj",
     "githubclientID": "2a037f763cd23735f578",
     "githubclientSecret": "db6e5df8382656b8b5107c2068c18d659a3cee28"
