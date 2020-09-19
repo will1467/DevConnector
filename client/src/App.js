@@ -5,9 +5,12 @@ import Landing from './components/layout/Landing';
 import Navbar from "./components/layout/Navbar";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import store from './store';
+import { Provider } from 'react-redux';
 
 function App() {
   return (
+    <Provider store={store}>
     <Router>
       <Fragment>
       <Navbar/>
@@ -20,6 +23,7 @@ function App() {
       </section>
     </Fragment>
     </Router>
+    </Provider>
 
   );
 }

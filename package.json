@@ -5,7 +5,9 @@
     "main": "server.js",
     "scripts": {
         "start": "node server",
-        "server": "nodemon server"
+        "server": "nodemon server",
+        "client": "cd client && npm start",
+        "dev" : "concurrently \"npm run server\" \"npm run client\""
     },
     "author": "William Wrigley",
     "license": "MIT",
@@ -20,7 +22,7 @@
         "request": "^2.88.0"
     },
     "devDependencies": {
-        "concurrently": "^5.0.0",
+        "concurrently": "^5.2.0",
         "nodemon": "^1.19.4"
     }
 }
