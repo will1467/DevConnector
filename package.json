@@ -7,7 +7,7 @@
         "start": "node server",
         "server": "nodemon server",
         "client": "cd client && npm start",
-        "dev" : "concurrently \"npm run server\" \"npm run client\""
+        "dev": "concurrently \"npm run server\" \"npm run client\""
     },
     "author": "William Wrigley",
     "license": "MIT",
