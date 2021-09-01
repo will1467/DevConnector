@@ -45,14 +45,14 @@ export const register = (newUser) => async dispatch => {
 
 
     } catch(err){
-        dispatch({
-            type: REGISTER_FAIL
-        })
-
         const errors = err.response.data.err;
         if(errors){
             errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')) )
         }
+
+        dispatch({
+            type: REGISTER_FAIL
+        })
         
     }
 }
@@ -72,14 +72,14 @@ export const login = (email, password) => async dispatch => {
         dispatch(loadUser());
 
     } catch(err){
-        dispatch({
-            type: LOGIN_FAIL
-        })
-
         const errors = err.response.data.err;
         if(errors){
             errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')) )
         }
+
+        dispatch({
+            type: LOGIN_FAIL
+        })
         
     }
 }
