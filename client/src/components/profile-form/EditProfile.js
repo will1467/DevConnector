@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Profile } from '../../actions/constants';
 import { Fragment } from 'react';
-import { createProfile } from '../../actions/profile';
+import { createProfile, getUserProfile } from '../../actions/profile';
 
-function CreateProfile(props) {
+function EditProfile(props) {
 
     const [formData, setFormData] = useState(
         Profile
@@ -14,13 +14,31 @@ function CreateProfile(props) {
 
     const [displaySocialInputs, toggleSocialInputs] = useState(false)
 
+    useEffect(() => {
+      const profileProp = props.profile;
+
+      if (!profileProp) props.getUserProfile();
+      if (!props.loading && profileProp) {
+        const profileData = { ...Profile };
+        for (const key in profileProp) {
+          if (key in profileData) profileData[key] = profileProp[key];
+        }
+        for (const key in profileProp.social) {
+          if (key in profileData) profileData[key] = profileProp.social[key];
+        }
+        if (Array.isArray(profileData.skills))
+          profileData.skills = profileData.skills.join(', ');
+        setFormData(profileData);
+      }
+    }, [props.loading, props.getUserProfile, props.profile]);
+
     const onChange = (e) => {
       setFormData({...formData, [e.target.name] : e.target.value})
     }
 
     const onSubmit = (e) => {
       e.preventDefault();
-      props.createProfile(formData, props.history);
+      props.createProfile(formData, props.history, true);
     }
 
     return (
@@ -133,13 +151,17 @@ function CreateProfile(props) {
     )
 }
 
-CreateProfile.propTypes = {
-  createProfile : PropTypes.func.isRequired
+EditProfile.propTypes = {
+  createProfile : PropTypes.func.isRequired,
+  getUserProfile : PropTypes.func.isRequired,
+  profile : PropTypes.object.isRequired,
+  loading : PropTypes.bool.isRequired
 }
 
-const mapStateToProps = (state) => {
-  
-}
+const mapStateToProps = (state) => ({
+  profile : state.profile.profile,
+  loading : state.profile.loading
+})
 
-export default connect(mapStateToProps, { createProfile } )(withRouter(CreateProfile))
+export default connect(mapStateToProps, { createProfile, getUserProfile } )(withRouter(EditProfile))
 

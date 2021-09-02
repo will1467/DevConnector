@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getUserProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
 import { Link } from 'react-router-dom';
+import { DashboardActions } from './DashboardActions';
 
 const Dashboard = props => {
     const Auth = props.auth;
@@ -26,7 +27,7 @@ const Dashboard = props => {
 
     const hasProfile = (
         <Fragment>
-        
+            <DashboardActions/>
         </Fragment>
     )
 

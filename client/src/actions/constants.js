@@ -12,7 +12,7 @@ export const PROFILE_ERROR = 'PROFILE_ERROR';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const CREATE_PROFILE = 'CREATE_PROFILE'
 
-export const Profile = [{
+export const Profile = {
     company : '',
     website : '',
     location : '',
@@ -25,5 +25,5 @@ export const Profile = [{
     instagram : '',
     linkedin : '',
     youtube : ''
-}]
+}
 
