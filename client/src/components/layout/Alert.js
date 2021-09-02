@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const Alert = (props) => {
-    console.log(props);
     if(props.alerts !== null && props.alerts.length > 0){
         return props.alerts.map((alert) => {
             return <div key={alert.id} className={`alert alert-${alert.alertType}`}>

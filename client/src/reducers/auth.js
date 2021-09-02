@@ -1,6 +1,6 @@
 import { REGISTER_FAIL, REGISTER_SUCCESS, 
     USER_LOADED, AUTH_ERROR,
-    LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from '../actions/constants';
+    LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_PROFILE } from '../actions/constants';
 const initialState = {
     token : localStorage.getItem('token'),
     isAuthenticated : null,
@@ -30,6 +30,10 @@ export default function(state = initialState, action){
                 return {
                     ...state, isAuthenticated : true, loading: false, user: payload
                 }
+        case CLEAR_PROFILE:
+            return {
+                ...state, profile : null, repos : [], loading : false
+            }
         default:
             return state;
     }
