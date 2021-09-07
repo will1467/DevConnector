@@ -14,10 +14,13 @@ export const getUserProfile = () => async dispatch => {
     } catch (err) {
 
         const errors = err.response.data.errors;
-        dispatch({
-            type: PROFILE_ERROR,
-            payload: { msg: errors[0].msg}
-        })
+        if(errors.length){
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: { msg: errors[0].msg}
+            })
+        }
+
     }
 }
 

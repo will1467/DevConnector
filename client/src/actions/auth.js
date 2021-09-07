@@ -22,7 +22,9 @@ export const loadUser = () => async dispatch => {
             type: AUTH_ERROR
         })
 
-        const errors = err.response.data.errors;
+
+        console.log(err);
+        const errors = err.response || null;
         if(errors){
             errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')) )
         }
@@ -69,10 +71,11 @@ export const login = (email, password) => async dispatch => {
             payload: res.data
         })
 
+
         dispatch(loadUser());
 
     } catch(err){
-        const errors = err.response.data.errors;
+        const errors = err.response.data.errors || null;
         if(errors){
             errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')) )
         }

@@ -5,43 +5,48 @@ import { getUserProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
 import { Link } from 'react-router-dom';
 import { DashboardActions } from './DashboardActions';
+import Experience from './Experience';
+import Education from './Education';
 
 const Dashboard = props => {
     const Auth = props.auth;
-    const Profile = props.profile;
+    const PROFILE_STATE = props.profile;
+    console.log(PROFILE_STATE);
+    console.log(Auth);
 
-    console.log(Profile.profile);
 
     useEffect(() => {
         props.getUserProfile();
     }, [])
 
-    const hasNoProfile = (
+    return (
         <Fragment>
-            <p> You have not yet setup a profile, please add some info</p>
-            <Link to='/create-profile' className="btn btn-primary my-1">
+                <h1 className="large text-primary">Dashboard</h1>
+                <p className="lead">
+                <i className="fas fa-user" /> Welcome {Auth.user && Auth.user.name}
+                </p>
+            {PROFILE_STATE.profile !== null ? (
+            <Fragment>
+                <DashboardActions />
+                <Experience experience={PROFILE_STATE.profile.experience} />
+                <Education education={PROFILE_STATE.profile.education} />
+
+                {/* <div className="my-2">
+                <button className="btn btn-danger" onClick={() => deleteAccount()}>
+                    <i className="fas fa-user-minus" /> Delete My Account
+                </button>
+                </div> */}
+            </Fragment>
+            ) : (
+            <Fragment>
+                <p>You have not yet setup a profile, please add some info</p>
+                <Link to="/create-profile" className="btn btn-primary my-1">
                 Create Profile
-            </Link>
+                </Link>
+            </Fragment>
+            )}
         </Fragment>
     )
-
-    const hasProfile = (
-        <Fragment>
-            <DashboardActions/>
-        </Fragment>
-    )
-
-
-    return Auth.loading && Profile.profile === null ? <Spinner/> : 
-      <Fragment>
-         <h1 className="large text-primary">Dashboard</h1>
-      <p className="lead"><i className="fas fa-user"></i> Welcome {Auth.user && Auth.user.name} </p>
-
-      {Profile.profile !== null ? hasProfile : hasNoProfile }
-
-      </Fragment>
-
-      
 }
 
 Dashboard.propTypes = {

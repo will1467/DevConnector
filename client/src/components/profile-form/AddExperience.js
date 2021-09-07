@@ -58,7 +58,7 @@ function AddExperience(props) {
             <input type="date" name="from"  value={formData.from} onChange={(e) => onChange(e)} />
             </div>
             <div className="form-group">
-            <p><input type="checkbox" name="current" onChange={(e) => onCurrentChange(e)} checked={formData.current} /> Current Job</p>
+            <p><input type="checkbox" name="current" onChange={(e) => onCurrentChange(e)} checked={formData.current} /> Currently Studying</p>
             </div>
             <div className="form-group">
             <h4>To Date</h4>
@@ -71,6 +71,7 @@ function AddExperience(props) {
                 cols="30"
                 rows="5"
                 placeholder="Job Description"
+                onChange={(e) => onChange(e)}
             ></textarea>
             </div>
             <input type="submit" className="btn btn-primary my-1" />

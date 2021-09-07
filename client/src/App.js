@@ -23,8 +23,12 @@ if(localStorage.getItem('token')){
 
 const App = () => {
   useEffect(() => {
-    store.dispatch(loadUser())
-  }, [])
+    // check for token in LS
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    store.dispatch(loadUser());
+  })
   
   return (
     <Provider store={store}>
