@@ -11,24 +11,24 @@ export const loadUser = () => async dispatch => {
         setAuthToken(localStorage.getItem('token'));
     }
 
-    try {
+   //try {
         const res = await axios.get('/api/auth');
         dispatch({
             type : USER_LOADED,
             payload : res.data
         })
-    } catch (err) {
-        dispatch({
-            type: AUTH_ERROR
-        })
+    //} catch (err) {
+        // dispatch({
+        //     type: AUTH_ERROR
+        // })
 
 
-        console.log(err);
-        const errors = err.response || null;
-        if(errors){
-            errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')) )
-        }
-    }
+        // console.log(err);
+        // const errors = err.response || null;
+        // if(errors){
+        //     errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')) )
+        // }
+    // }
 }
 
 export const register = (newUser) => async dispatch => {

@@ -170,21 +170,21 @@ router.put(
 
 //remove an experience
 
-router.delete("/experience/:exp_id", auth, async (req, res) => {
+router.delete('/experience/:exp_id', auth, async (req, res) => {
     try {
-        let profile = await Profile.findOne({ user: req.user.id });
-        let aItems = profile.experience.map(item => {
-            return item.id;
-        });
-        let removeIndex = aItems.indexOf(req.params.exp_id);
-        profile.experience.splice(removeIndex, 1);
-        await profile.save();
-        res.json({ msg: "Experience removed successfully" });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send("Server Error");
+      const foundProfile = await Profile.findOne({ user: req.user.id });
+  
+      foundProfile.experience = foundProfile.experience.filter(
+        (exp) => exp._id.toString() !== req.params.exp_id
+      );
+  
+      await foundProfile.save();
+      return res.status(200).json(foundProfile);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ msg: 'Server error' });
     }
-});
+  });
 
 //add education (via put req)
 router.put(
@@ -237,21 +237,19 @@ router.put(
 
 //remove an education
 
-router.delete("/education/:exp_id", auth, async (req, res) => {
+router.delete('/education/:edu_id', auth, async (req, res) => {
     try {
-        let profile = await Profile.findOne({ user: req.user.id });
-        let aItems = profile.education.map(item => {
-            return item.id;
-        });
-        let removeIndex = aItems.indexOf(req.params.exp_id);
-        profile.education.splice(removeIndex, 1);
-        await profile.save();
-        res.json({ msg: "Education removed successfully" });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send("Server Error");
+      const foundProfile = await Profile.findOne({ user: req.user.id });
+      foundProfile.education = foundProfile.education.filter(
+        (edu) => edu._id.toString() !== req.params.edu_id
+      );
+      await foundProfile.save();
+      return res.status(200).json(foundProfile);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ msg: 'Server error' });
     }
-});
+  });
 
 //get user github repos
 

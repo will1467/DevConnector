@@ -1,6 +1,6 @@
 import { REGISTER_FAIL, REGISTER_SUCCESS, 
     USER_LOADED, AUTH_ERROR,
-    LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_PROFILE } from '../actions/constants';
+    LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_PROFILE, ACCOUNT_DELETED } from '../actions/constants';
 const initialState = {
     token : localStorage.getItem('token'),
     isAuthenticated : null,
@@ -9,7 +9,7 @@ const initialState = {
 };
 
 
-export default function(state = initialState, action){
+const authReducer = (state = initialState, action) => {
     const { type, payload } = action;
     switch(type){
         case REGISTER_SUCCESS:
@@ -18,6 +18,7 @@ export default function(state = initialState, action){
             return {
                 ...state, ...payload, isAuthenticated : true, loading: false
             };
+        case ACCOUNT_DELETED:
         case REGISTER_FAIL:
         case LOGIN_FAIL:
         case AUTH_ERROR:
@@ -30,11 +31,9 @@ export default function(state = initialState, action){
                 return {
                     ...state, isAuthenticated : true, loading: false, user: payload
                 }
-        case CLEAR_PROFILE:
-            return {
-                ...state, profile : null, repos : [], loading : false
-            }
         default:
             return state;
     }
 }
+
+export default authReducer;

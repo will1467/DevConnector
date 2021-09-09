@@ -7,6 +7,8 @@ import { Fragment } from 'react';
 import { createProfile, getUserProfile } from '../../actions/profile';
 
 function EditProfile(props) {
+  const { loading, getUserProfile, profile } = props;
+
 
     const [formData, setFormData] = useState(
         Profile
@@ -15,22 +17,21 @@ function EditProfile(props) {
     const [displaySocialInputs, toggleSocialInputs] = useState(false)
 
     useEffect(() => {
-      const profileProp = props.profile;
 
-      if (!profileProp) props.getUserProfile();
-      if (!props.loading && profileProp) {
+      if (!profile) getUserProfile();
+      if (!props.loading && profile) {
         const profileData = { ...Profile };
-        for (const key in profileProp) {
-          if (key in profileData) profileData[key] = profileProp[key];
+        for (const key in profile) {
+          if (key in profileData) profileData[key] = profile[key];
         }
-        for (const key in profileProp.social) {
-          if (key in profileData) profileData[key] = profileProp.social[key];
+        for (const key in profile.social) {
+          if (key in profileData) profileData[key] = profile.social[key];
         }
         if (Array.isArray(profileData.skills))
           profileData.skills = profileData.skills.join(', ');
         setFormData(profileData);
       }
-    }, [props.loading, props.getUserProfile, props.profile]);
+    }, [loading, getUserProfile, profile]);
 
     const onChange = (e) => {
       setFormData({...formData, [e.target.name] : e.target.value})
