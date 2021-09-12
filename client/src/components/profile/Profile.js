@@ -8,6 +8,7 @@ import { getProfileByID } from '../../actions/profile'
 import { Link } from 'react-router-dom';
 import ProfileExperience from './ProfileExperience';
 import ProfileEducation from './ProfileEducation';
+import ProfileGithub from './ProfileGithub';
 
 
 
@@ -25,23 +26,25 @@ const Profile = ({getProfileByID, profile, auth, match}) => {
                 <Link to="/profiles" className="btn btn-light">Back to Profiles</Link>
                 {auth.isAuthenticated && profile.loading === false && auth.user._id === Profile.user._id && 
                  <Link to="/edit-profile" className="btn btn-dark">Edit Profile</Link>}
-                  <div class="profile-grid my-1">
+                  <div className="profile-grid my-1">
                     <ProfileTop profile={Profile} />
                     <ProfileAbout profile={Profile}/>
                     <div className="profile-exp bg-white p-2">
-                        <h2 class="text-primary">Experience</h2>
+                        <h2 className="text-primary">Experience</h2>
                         {Profile.experience.length > 0 ? (<Fragment>
-                            {profile.experience.map(experience => (<ProfileExperience key={experience._id} experience={experience}/>)) }
+                            {Profile.experience.map(experience => (<ProfileExperience key={experience._id} experience={experience}/>)) }
                             </Fragment> ) : (<h4>No experience credentials</h4>) }
                     </div>
                     <div className="profile-edu bg-white p-2">
-                        <h2 class="text-primary">Education</h2>
+                        <h2 className="text-primary">Education</h2>
                         {Profile.education.length > 0 ? (<Fragment>
-                            {profile.education.map(education => (<ProfileEducation key={education._id} education={education}/>)) }
+                            {Profile.education.map(education => (<ProfileEducation key={education._id} education={education}/>)) }
                             </Fragment> ) : (<h4>No education</h4>) }
                     </div>
 
-                            {profile.githubusername}
+                            {Profile.githubusername && (
+                                <ProfileGithub username={Profile.githubusername}/>
+                            )}
 
                   </div>
             </Fragment>} 

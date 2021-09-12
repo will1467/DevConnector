@@ -83,7 +83,7 @@ export const getGithubRepos = (githubusername) => async dispatch => {
     } catch (err) {
 
         const errors = err.response.data.errors;
-        if(errors.length){
+        if(errors && errors.length){
             dispatch({
                 type: PROFILE_ERROR,
                 payload: { msg: errors[0].msg}
