@@ -15,6 +15,12 @@ export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const ACCOUNT_DELETED = 'DELETE_ACCOUNT';
 export const GET_PROFILES = 'GET_PROFILES';
 export const GET_REPOS = 'GET_REPOS';
+export const GET_POSTS = 'GET_POSTS';
+export const POST_ERROR = 'POST_ERROR';
+export const UPDATE_LIKE = 'UPDATE_LIKE';
+export const DELETE_POST = 'UPDATE_LIKE';
+export const ADD_POST = 'ADD_POST'
+
 
 export const Profile = {
     company : '',
